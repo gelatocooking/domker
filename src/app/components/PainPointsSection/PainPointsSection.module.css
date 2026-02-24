@@ -1,8 +1,39 @@
 .section {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
   background: var(--color-surface-2);
+  --parallax-offset: 0px;
+  --section-card-bg: rgba(255, 255, 255, 0.72);
+  --section-card-bg-soft: rgba(255, 255, 255, 0.66);
+  --section-card-bg-strong: rgba(255, 255, 255, 0.8);
+  --section-card-border: rgba(255, 255, 255, 0.35);
+}
+
+.section::before {
+  content: "";
+  position: absolute;
+  inset: -20% -10%;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(
+      36rem 22rem at 16% 18%,
+      rgba(0, 146, 139, 0.09),
+      rgba(0, 146, 139, 0) 68%
+    ),
+    radial-gradient(
+      34rem 20rem at 86% 22%,
+      rgba(117, 74, 255, 0.11),
+      rgba(117, 74, 255, 0) 72%
+    );
+  transform: translate3d(0, var(--parallax-offset), 0);
+  transition: transform 140ms linear;
 }
 
 .container {
+  position: relative;
+  z-index: 1;
   display: grid;
   gap: var(--sp-8);
 }
@@ -63,8 +94,8 @@
   gap: var(--sp-3);
   padding: clamp(1.35rem, 1.1rem + 0.6vw, 1.85rem);
   border-radius: 1rem;
-  border: 1px solid rgba(255, 255, 255, 0.35);
-  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid var(--section-card-border, rgba(255, 255, 255, 0.35));
+  background: var(--section-card-bg, rgba(255, 255, 255, 0.72));
   box-shadow:
     0 12px 30px rgba(16, 24, 40, 0.08),
     inset 0 1px 0 rgba(255, 255, 255, 0.55);
@@ -119,8 +150,8 @@
   display: grid;
   gap: 0.5rem;
   border-radius: 0.9rem;
-  border: 1px solid rgba(255, 255, 255, 0.35);
-  background: rgba(255, 255, 255, 0.66);
+  border: 1px solid var(--section-card-border, rgba(255, 255, 255, 0.35));
+  background: var(--section-card-bg-soft, rgba(255, 255, 255, 0.66));
   box-shadow:
     0 10px 26px rgba(16, 24, 40, 0.07),
     inset 0 1px 0 rgba(255, 255, 255, 0.52);
@@ -156,6 +187,13 @@
 
 .processLabel {
   color: var(--color-text);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .section::before {
+    transition: none;
+    transform: none;
+  }
 }
 
 @media (min-width: 768px) {
@@ -207,3 +245,4 @@
     display: flex;
   }
 }
+

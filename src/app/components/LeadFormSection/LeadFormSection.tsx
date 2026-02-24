@@ -11,7 +11,7 @@ const deliverables = [
 ] as const;
 
 const guidanceChips = ["Odbiór", "Otwarcie", "Noc", "Procedury dostępu", "Pilne"] as const;
-const trustBadges = ["Faktura VAT", "NDA", "OC 500k+", "Protokół + zdjęcia"] as const;
+const trustBadges = ["Faktura VAT",  "OC 500k+", "Protokół + zdjęcia"] as const;
 
 
 type RequiredField = "companyName" | "contact" | "location";

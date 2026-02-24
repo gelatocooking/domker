@@ -1,4 +1,4 @@
-﻿.container {
+.container {
   display: grid;
   gap: var(--sp-6);
 }
@@ -23,7 +23,7 @@
 }
 
 .itemFeatured {
-  background: rgba(255, 255, 255, 0.76);
+  background: var(--section-card-bg, rgba(255, 255, 255, 0.76));
   border-left: 2px solid color-mix(in oklab, var(--ui-primary) 55%, transparent);
   border-color: rgba(255, 255, 255, 0.38);
   box-shadow:
@@ -111,7 +111,7 @@
 }
 
 .slaNote summary::after {
-  content: "˅";
+  content: "?";
   font-size: 0.85em;
   transition: transform var(--dur-2) var(--ease-out);
 }
@@ -132,4 +132,5 @@
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
+
 

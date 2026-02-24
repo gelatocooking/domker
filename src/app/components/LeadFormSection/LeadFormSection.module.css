@@ -27,7 +27,7 @@
 .form,
 .proof,
 .successCard {
-  background: rgba(255, 255, 255, 0.72);
+  background: var(--section-card-bg, rgba(255, 255, 255, 0.72));
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border-color: rgba(255, 255, 255, 0.35);
@@ -241,3 +241,4 @@
     justify-content: center;
   }
 }
+

@@ -83,6 +83,7 @@
   min-height: calc(2 * 1.18em);
 }
 
+
 .standardBody {
   display: grid;
   gap: var(--sp-3);
@@ -251,9 +252,9 @@
   margin: 0;
   padding: 0.4rem 0.8rem;
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.68);
-  border: 1px solid rgba(255, 255, 255, 0.36);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.52);
+  background: #ebe4ff;
+  border: 1px solid color-mix(in oklab, #ebe4ff 72%, var(--color-primary) 28%);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.38);
   color: var(--color-primary);
   font-size: var(--fs-200);
   font-weight: 700;
@@ -296,8 +297,8 @@
   align-items: center;
   padding: 0.28rem 0.55rem;
   border-radius: 999px;
-  border: 1px solid rgba(255, 255, 255, 0.34);
-  background: rgba(255, 255, 255, 0.62);
+  border: 1px solid var(--section-card-border, rgba(255, 255, 255, 0.34));
+  background: var(--section-card-bg-soft, rgba(255, 255, 255, 0.62));
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5);
   color: color-mix(in oklab, var(--color-primary) 85%, var(--color-text) 15%);
   font-size: var(--fs-300);
@@ -308,7 +309,7 @@
 
 .personaLink:hover,
 .personaLink:focus-visible {
-  background: rgba(255, 255, 255, 0.74);
+  background: var(--section-card-bg, rgba(255, 255, 255, 0.74));
   text-decoration: none;
 }
 

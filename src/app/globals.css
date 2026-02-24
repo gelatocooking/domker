@@ -777,11 +777,19 @@
   /* Home page scalable skin */
   .homeDesignV2 > .section:not(:first-of-type) {
     padding-block: clamp(2.3rem, 4.2vw, 5rem);
-    background: #f6f3ff;
+    background: var(--white);
+    --section-card-bg: rgba(246, 243, 255, 0.84);
+    --section-card-bg-soft: rgba(246, 243, 255, 0.78);
+    --section-card-bg-strong: rgba(246, 243, 255, 0.9);
+    --section-card-border: rgba(226, 214, 255, 0.65);
   }
 
   .homeDesignV2 > .section:not(:first-of-type):nth-of-type(odd) {
-    background: color-mix(in oklab, #f6f3ff 72%, var(--white) 28%);
+    background: #f6f3ff;
+    --section-card-bg: rgba(255, 255, 255, 0.72);
+    --section-card-bg-soft: rgba(255, 255, 255, 0.66);
+    --section-card-bg-strong: rgba(255, 255, 255, 0.8);
+    --section-card-border: rgba(255, 255, 255, 0.35);
   }
 
   .homeDesignV2 > .section:not(:first-of-type) .container {
@@ -800,12 +808,24 @@
     text-wrap: balance;
   }
 
-  .homeDesignV2 > .section:not(:first-of-type) .card {
-    border-color: rgba(255, 255, 255, 0.35);
+  .homeDesignV2 > .section:not(:first-of-type):nth-of-type(odd) .card,
+  .homeDesignV2 > .section:not(:first-of-type):nth-of-type(odd) .cardSoft {
+    border-color: var(--section-card-border, rgba(255, 255, 255, 0.35));
     box-shadow:
       0 12px 30px rgba(16, 24, 40, 0.08),
       inset 0 1px 0 rgba(255, 255, 255, 0.55);
-    background: rgba(255, 255, 255, 0.72);
+    background: var(--section-card-bg, rgba(255, 255, 255, 0.72));
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+
+  .homeDesignV2 > .section:not(:first-of-type):not(:nth-of-type(odd)) .card,
+  .homeDesignV2 > .section:not(:first-of-type):not(:nth-of-type(odd)) .cardSoft {
+    border-color: rgba(226, 214, 255, 0.65);
+    box-shadow:
+      0 12px 30px rgba(16, 24, 40, 0.07),
+      inset 0 1px 0 rgba(255, 255, 255, 0.45);
+    background: rgba(246, 243, 255, 0.84);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
   }
@@ -814,3 +834,4 @@
     border-radius: 0.85rem;
   }
 }
+

@@ -1,4 +1,7 @@
-﻿import Image from "next/image";
+﻿"use client";
+
+import { useEffect, useRef } from "react";
+import Image from "next/image";
 import styles from "./PainPointsSection.module.css";
 
 const riskCards = [
@@ -109,8 +112,46 @@ function renderProcessIcon(step: (typeof processSteps)[number]) {
 }
 
 export default function PainPointsSection() {
+  const sectionRef = useRef<HTMLElement | null>(null);
+
+  useEffect(() => {
+    const section = sectionRef.current;
+    if (!section) return;
+
+    let ticking = false;
+
+    const updateParallax = () => {
+      const rect = section.getBoundingClientRect();
+      const viewportHeight = window.innerHeight || 1;
+      const progress = (viewportHeight - rect.top) / (viewportHeight + rect.height);
+      const clamped = Math.max(0, Math.min(1, progress));
+      const offset = (clamped - 0.5) * 40;
+      section.style.setProperty("--parallax-offset", `${offset.toFixed(2)}px`);
+      ticking = false;
+    };
+
+    const onScroll = () => {
+      if (!ticking) {
+        ticking = true;
+        window.requestAnimationFrame(updateParallax);
+      }
+    };
+
+    updateParallax();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+    };
+  }, []);
   return (
-    <section className={`section ${styles.section}`} aria-labelledby="pain-points-title">
+    <section
+      ref={sectionRef}
+      className={`section ${styles.section}`}
+      aria-labelledby="pain-points-title"
+    >
       <div className={`container ${styles.container}`}>
         <header className={styles.header}>
           <div className={styles.headerTop}>
@@ -161,3 +202,7 @@ export default function PainPointsSection() {
     </section>
   );
 }
+
+
+
+

@@ -18,8 +18,8 @@
   display: grid;
   gap: var(--sp-3);
   padding: var(--sp-6);
-  background: rgba(255, 255, 255, 0.72);
-  border: 1px solid rgba(255, 255, 255, 0.35);
+  background: var(--section-card-bg, rgba(255, 255, 255, 0.72));
+  border: 1px solid var(--section-card-border, rgba(255, 255, 255, 0.35));
   box-shadow:
     0 12px 30px rgba(16, 24, 40, 0.08),
     inset 0 1px 0 rgba(255, 255, 255, 0.55);
@@ -28,7 +28,7 @@
 }
 
 .cardHighlight {
-  background: rgba(255, 255, 255, 0.78);
+  background: var(--section-card-bg-strong, rgba(255, 255, 255, 0.78));
   border-left: 3px solid color-mix(in oklab, var(--ui-primary) 58%, transparent);
   border-color: rgba(255, 255, 255, 0.38);
 }
@@ -123,8 +123,8 @@
   max-width: 100%;
   padding: 0.5rem 0.62rem;
   border-radius: 0.7rem;
-  background: rgba(255, 255, 255, 0.58);
-  border: 1px solid rgba(255, 255, 255, 0.32);
+  background: var(--section-card-bg-soft, rgba(255, 255, 255, 0.58));
+  border: 1px solid var(--section-card-border, rgba(255, 255, 255, 0.32));
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5);
   color: color-mix(in oklab, var(--color-text-2) 84%, var(--ui-primary) 16%);
   font-size: var(--fs-200);
@@ -132,7 +132,7 @@
 }
 
 .cardHighlight .effect {
-  background: rgba(255, 255, 255, 0.64);
+  background: var(--section-card-bg-soft, rgba(255, 255, 255, 0.64));
   border-color: rgba(255, 255, 255, 0.36);
 }
 
@@ -174,3 +174,4 @@
     grid-column: 1 / -1;
   }
 }
+
