@@ -141,6 +141,8 @@
 }
 
 .dropdownIcon {
+  display: inline-flex;
+  align-items: center;
   color: var(--ui-muted);
   font-size: var(--fs-200);
 }

@@ -13,7 +13,7 @@ const trustBadges = [
 export default function HeroSection() {
   return (
     <section className={`section hero ${styles.section}`} aria-labelledby="hero-title">
-      <div className={`container ${styles.container}`}>
+      <div className={`containerWide ${styles.container}`}>
         <div className={styles.content}>
           <p className={styles.eyebrow}>Usługi dla firm</p>
           <h1 id="hero-title" className={styles.title}>
@@ -65,4 +65,3 @@ export default function HeroSection() {
     </section>
   );
 }
-

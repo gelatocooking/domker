@@ -1,4 +1,4 @@
-.section {
+﻿.section {
   background: var(--color-surface-2);
 }
 
@@ -13,6 +13,25 @@
   max-width: 62rem;
 }
 
+.quickLinks {
+  display: grid;
+  gap: var(--sp-2);
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.quickLink {
+  color: var(--color-primary);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.quickLink:hover,
+.quickLink:focus-visible {
+  text-decoration: underline;
+}
+
 .grid {
   display: grid;
   gap: var(--sp-4);
@@ -22,15 +41,7 @@
   display: grid;
   gap: var(--sp-3);
   padding: var(--sp-6);
-}
-
-.card p {
-  color: var(--color-text-2);
-}
-
-.listIntro {
-  font-weight: 700;
-  color: var(--color-text);
+  scroll-margin-top: 6rem;
 }
 
 .list {
@@ -38,31 +49,20 @@
   gap: var(--sp-2);
   list-style: disc;
   padding-left: 1.2rem;
+  margin: 0;
 }
 
 .list li {
   color: var(--color-text-2);
 }
 
-.microCta {
-  width: fit-content;
-  color: var(--color-primary);
-  font-weight: 700;
-  text-decoration: none;
-}
-
 .footnote {
   font-size: var(--fs-300);
   color: var(--color-muted);
-  font-style: italic;
 }
 
 @media (min-width: 768px) {
   .grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .grid > .card:last-child {
-    grid-column: 1 / -1;
   }
 }

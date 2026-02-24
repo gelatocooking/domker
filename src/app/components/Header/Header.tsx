@@ -134,7 +134,16 @@ export default function Header() {
                   <span>{item.label}</span>
                   {item.submenu && (
                     <span className={styles.dropdownIcon} aria-hidden="true">
-                      ?
+                      <svg viewBox="0 0 16 16" width="12" height="12" focusable="false">
+                        <path
+                          d="M4 6.5L8 10.5L12 6.5"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="1.8"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </svg>
                     </span>
                   )}
                 </Link>

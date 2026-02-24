@@ -382,14 +382,14 @@
   .card {
     background: var(--color-surface);
     border: var(--bw-1) solid var(--color-border-soft);
-    border-radius: var(--r-4);
+    border-radius: 0;
     box-shadow: var(--sh-1);
   }
 
   .cardSoft {
     background: var(--color-surface-2);
     border: var(--bw-1) solid var(--color-border-soft);
-    border-radius: var(--r-4);
+    border-radius: 0;
   }
 
   /* “Pills” / chips */

@@ -22,16 +22,18 @@
   position: relative;
   z-index: 1;
   display: grid;
+  max-width: 1360px;
 }
 
 .content {
   position: relative;
   display: grid;
   gap: var(--sp-6);
-  max-width: 70rem;
+  width: 100%;
+  max-width: none;
   padding: clamp(var(--sp-6), 2.5vw, var(--sp-10));
   border: var(--bw-2) solid var(--ui-border);
-  border-radius: var(--r-4);
+  border-radius: 0;
   background: var(--ui-surface);
   box-shadow: var(--ui-shadow-2);
 }
@@ -63,7 +65,7 @@
 }
 
 .title {
-  max-width: 24ch;
+  max-width: 34ch;
   color: var(--ui-text);
   text-wrap: balance;
   text-shadow: 0 1px 0 color-mix(in oklab, var(--ui-surface) 75%, transparent);
