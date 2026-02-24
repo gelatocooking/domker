@@ -1,0 +1,29 @@
+.section {
+  background: var(--color-surface-2);
+}
+
+.container {
+  display: grid;
+  gap: var(--sp-6);
+}
+
+.header {
+  display: grid;
+  gap: var(--sp-4);
+  max-width: 62rem;
+}
+
+.form {
+  display: grid;
+  gap: var(--sp-5);
+  padding: var(--sp-6);
+}
+
+.submit {
+  width: fit-content;
+}
+
+.note {
+  color: var(--color-muted);
+  font-size: var(--fs-300);
+}

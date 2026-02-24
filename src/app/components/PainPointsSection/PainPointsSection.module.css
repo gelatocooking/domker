@@ -1,0 +1,30 @@
+.section {
+  background: var(--color-surface-2);
+}
+
+.container {
+  display: grid;
+  gap: var(--sp-8);
+}
+
+.header {
+  display: grid;
+  gap: var(--sp-4);
+  max-width: 62rem;
+}
+
+.list {
+  display: grid;
+  gap: var(--sp-4);
+}
+
+.item {
+  padding: var(--sp-6);
+  color: var(--color-text-2);
+  line-height: var(--lh-relaxed);
+}
+
+.summary {
+  color: var(--color-text);
+  font-size: var(--fs-500);
+}

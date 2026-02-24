@@ -1,0 +1,20 @@
+.container {
+  display: grid;
+  gap: var(--sp-6);
+}
+
+.header {
+  display: grid;
+  gap: var(--sp-4);
+  max-width: 62rem;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-3);
+}
+
+.cta {
+  text-decoration: none;
+}

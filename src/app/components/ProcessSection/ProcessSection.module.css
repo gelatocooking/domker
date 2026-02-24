@@ -1,0 +1,64 @@
+.section {
+  position: relative;
+  padding-block: var(--section-py);
+  overflow: hidden;
+  background: var(--ui-bg-grad);
+}
+
+.section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(to right, var(--ui-border-soft) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--ui-border-soft) 1px, transparent 1px);
+  background-size: 24px 24px;
+  opacity: 0.55;
+}
+
+.container {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: var(--sp-8);
+}
+
+.header {
+  max-width: 62rem;
+}
+
+.steps {
+  display: grid;
+  gap: var(--sp-4);
+  margin: 0;
+  padding: 0;
+}
+
+.step {
+  display: grid;
+  gap: var(--sp-3);
+  padding: var(--sp-6);
+}
+
+.step p {
+  color: var(--color-text-2);
+}
+
+.index {
+  font-size: var(--fs-300);
+  color: var(--color-accent);
+  font-weight: 700;
+}
+
+.cta {
+  width: fit-content;
+  text-decoration: none;
+}
+
+@media (min-width: 768px) {
+  .steps {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+

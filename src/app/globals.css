@@ -1,42 +1,681 @@
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+/* globals.css */
+/* ==========================================================================
+   Design System (tokens) + base styles for Next.js + CSS Modules
+   - Clean / premium look for cleaning services
+   - Fluid typography & spacing
+   - Accessible defaults
+   ========================================================================== */
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* ----------------------------- CSS Layers -------------------------------- */
+@layer reset, tokens, base, components, utilities;
+
+/* ------------------------------- RESET ----------------------------------- */
+@layer reset {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  html:focus-within {
+    scroll-behavior: smooth;
+  }
+
+  html,
+  body {
+    height: 100%;
+  }
+
+  body {
+    margin: 0;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  img,
+  picture,
+  video,
+  canvas,
+  svg {
+    display: block;
+    max-width: 100%;
+    height: auto;
+  }
+
+  input,
+  button,
+  textarea,
+  select {
+    font: inherit;
+    color: inherit;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  ul,
+  ol {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+
+  p,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    margin: 0;
+    overflow-wrap: break-word;
+  }
+
+  /* Better default for anchors with fixed header */
+  :target {
+    scroll-margin-top: 96px;
   }
 }
 
-html,
-body {
-  max-width: 100vw;
-  overflow-x: hidden;
+/* -------------------------------- TOKENS -------------------------------- */
+@layer tokens {
+  :root {
+    /* ---- Typography (set your Next font in app/layout and keep this stack) */
+    --font-sans:
+      ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Inter,
+      Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+    --font-mono:
+      ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+      "Courier New", monospace;
+
+    /* Fluid type scale (clamp(min, vw, max)) */
+    --fs-900: clamp(2.1rem, 2.6vw + 1.2rem, 3.25rem); /* hero */
+    --fs-800: clamp(1.8rem, 1.9vw + 1.1rem, 2.4rem); /* h1 */
+    --fs-700: clamp(1.45rem, 1.2vw + 1rem, 1.9rem); /* h2 */
+    --fs-600: clamp(1.2rem, 0.6vw + 1rem, 1.45rem); /* h3 */
+    --fs-500: 1.0625rem; /* base+ */
+    --fs-400: 1rem; /* base */
+    --fs-300: 0.9375rem; /* small */
+    --fs-200: 0.875rem; /* xs */
+
+    --lh-tight: 1.1;
+    --lh-snug: 1.25;
+    --lh-normal: 1.5;
+    --lh-relaxed: 1.7;
+
+    /* ---- Spacing scale (4px base) */
+    --sp-0: 0;
+    --sp-1: 0.25rem; /* 4 */
+    --sp-2: 0.5rem; /* 8 */
+    --sp-3: 0.75rem; /* 12 */
+    --sp-4: 1rem; /* 16 */
+    --sp-5: 1.25rem; /* 20 */
+    --sp-6: 1.5rem; /* 24 */
+    --sp-7: 1.75rem; /* 28 */
+    --sp-8: 2rem; /* 32 */
+    --sp-10: 2.5rem; /* 40 */
+    --sp-12: 3rem; /* 48 */
+    --sp-14: 3.5rem; /* 56 */
+    --sp-16: 4rem; /* 64 */
+    --sp-20: 5rem; /* 80 */
+    --sp-24: 6rem; /* 96 */
+    --sp-28: 7rem; /* 112 */
+    --sp-32: 8rem; /* 128 */
+
+    /* Fluid section padding (nice on mobile and desktop) */
+    --section-py: clamp(2.5rem, 4vw, 5rem);
+    --section-px: clamp(1rem, 3vw, 2rem);
+
+    /* ---- Radius (rounded, friendly, premium) */
+    --r-1: 10px;
+    --r-2: 14px;
+    --r-3: 18px;
+    --r-4: 24px;
+    --r-pill: 999px;
+
+    /* ---- Shadows (soft, layered) */
+    --sh-1: 0 8px 24px rgba(15, 23, 42, 0.08);
+    --sh-2: 0 14px 40px rgba(15, 23, 42, 0.12);
+    --sh-inset: inset 0 1px 0 rgba(255, 255, 255, 0.6);
+
+    /* ---- Borders */
+    --bw-1: 1px;
+    --bw-2: 2px;
+
+    /* ---- Layout */
+    --container-max: 1160px;
+    --container-max-wide: 1240px;
+
+    /* ---- Brand palette (granat + teal + lawenda, “cleaning-premium”) */
+    --brand-navy-950: #0b1630;
+    --brand-navy-900: #00928b;
+    --brand-navy-800: #00928b;
+    --brand-navy-700: #00928b;
+
+    --brand-teal-700: #00928b;
+    --brand-teal-600: #00928b;
+    --brand-teal-500: #00928b;
+
+    --lav-50: #fbfaff;
+    --lav-75: #f6f3ff;
+    --lav-100: #f1ecff;
+    --lav-150: #ebe4ff;
+
+    --slate-900: #0b1630;
+    --slate-700: #14305f;
+    --slate-600: #193a70;
+    --slate-500: #ebe4ff;
+    --slate-300: #cbd5e1;
+    --slate-200: #e2e8f0;
+    --slate-100: #f1f5f9;
+    --white: #ffffff;
+
+    /* ---- Semantic colors */
+    --color-bg: var(--white);
+    --color-surface: var(--white);
+    --color-surface-2: var(--lav-75);
+    --color-surface-3: var(--lav-100);
+
+    --color-text: var(--slate-900);
+    --color-text-2: var(--slate-700);
+    --color-muted: var(--slate-600);
+
+    --color-border: rgba(15, 23, 42, 0.14);
+    --color-border-soft: rgba(15, 23, 42, 0.1);
+
+    --color-primary: var(--brand-navy-800);
+    --color-primary-hover: var(--brand-navy-900);
+    --color-primary-contrast: var(--white);
+
+    --color-accent: var(--brand-teal-600);
+    --color-accent-hover: var(--brand-teal-700);
+    --color-accent-contrast: var(--white);
+
+    --color-focus: rgba(22, 180, 171, 0.35);
+
+    --color-danger: #dc2626;
+    --color-success: #16a34a;
+    --color-warning: #f59e0b;
+
+    /* ---- Breakpoint variant tokens (global, one-place configuration) */
+    --breakpoint-bg: var(--color-primary);
+    --breakpoint-text: var(--color-primary-contrast);
+    --breakpoint-card-bg: var(--color-surface);
+    --breakpoint-card-text: var(--color-text);
+    --breakpoint-card-border: var(--color-border-soft);
+    --breakpoint-card-shadow: var(--sh-1);
+    --breakpoint-btn-bg: var(--color-surface);
+    --breakpoint-btn-text: var(--color-text);
+    --breakpoint-btn-border: var(--color-border-soft);
+    --breakpoint-btn-shadow: var(--sh-1);
+    --breakpoint-btn-hover-bg: var(--color-surface-2);
+
+    /* ---- UI aliases (for section-level components using --ui-*) */
+    --ui-bg: var(--color-bg);
+    --ui-bg-grad: var(--grad-hero);
+
+    --ui-text: var(--color-text);
+    --ui-text-2: var(--color-text-2);
+    --ui-muted: var(--color-muted);
+
+    --ui-surface: var(--color-surface);
+    --ui-surface-2: var(--color-surface-2);
+    --ui-surface-3: var(--color-surface-3);
+
+    --ui-border: var(--color-border);
+    --ui-border-soft: var(--color-border-soft);
+
+    --ui-primary: var(--color-primary);
+    --ui-primary-hover: var(--color-primary-hover);
+    --ui-primary-contrast: var(--color-primary-contrast);
+
+    --ui-shadow-1: var(--sh-1);
+    --ui-shadow-2: var(--sh-2);
+    --ui-inset: var(--sh-inset);
+
+    /* ---- Gradients (optional, nice for hero pills / highlights) */
+    --grad-hero:
+      radial-gradient(
+        1200px 600px at 20% 0%,
+        rgba(235, 228, 255, 0.9),
+        rgba(255, 255, 255, 0) 60%
+      ),
+      radial-gradient(
+        900px 540px at 90% 20%,
+        rgba(22, 180, 171, 0.12),
+        rgba(255, 255, 255, 0) 55%
+      );
+
+    /* ---- Motion */
+    --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+    --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+    --dur-1: 140ms;
+    --dur-2: 220ms;
+    --dur-3: 420ms;
+  }
+
+  /* Breakpoint helpers (use in module.css as reference) */
+  :root {
+    --bp-sm: 480px;
+    --bp-md: 768px;
+    --bp-lg: 1024px;
+    --bp-xl: 1280px;
+  }
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-* {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-@media (prefers-color-scheme: dark) {
+/* --------------------------------- BASE --------------------------------- */
+@layer base {
   html {
-    color-scheme: dark;
+    font-family: var(--font-sans);
+    background: var(--color-bg);
+    color: var(--color-text);
+  }
+
+  body {
+    font-size: var(--fs-400);
+    line-height: var(--lh-normal);
+  }
+
+  /* Page background pattern like the templates (but cleaner) */
+  .pageBg {
+    background: var(--grad-hero);
+  }
+
+  /* Headings */
+  h1 {
+    font-size: var(--fs-800);
+    line-height: var(--lh-tight);
+    letter-spacing: -0.02em;
+  }
+  h2 {
+    font-size: var(--fs-700);
+    line-height: var(--lh-tight);
+    letter-spacing: -0.02em;
+  }
+  h3 {
+    font-size: var(--fs-600);
+    line-height: var(--lh-snug);
+    letter-spacing: -0.01em;
+  }
+
+  p {
+    color: var(--color-text-2);
+  }
+
+  .lead {
+    font-size: var(--fs-500);
+    line-height: var(--lh-relaxed);
+    color: var(--color-text-2);
+  }
+
+  .muted {
+    color: var(--color-muted);
+  }
+
+  /* Links */
+  a:hover {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-thickness: 2px;
+  }
+
+  /* Focus */
+  :where(a, button, input, textarea, select, summary):focus-visible {
+    outline: 3px solid var(--color-focus);
+    outline-offset: 3px;
+    border-radius: 10px;
+  }
+
+  /* Selection */
+  ::selection {
+    background: rgba(22, 180, 171, 0.22);
+  }
+
+  /* Better default for small text blocks */
+  .textSm {
+    font-size: var(--fs-300);
+    line-height: var(--lh-relaxed);
+    color: var(--color-text-2);
+  }
+
+  /* Reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    html:focus-within {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+/* ------------------------------ COMPONENTS ------------------------------- */
+@layer components {
+  /* Containers */
+  .container {
+    width: 100%;
+    max-width: var(--container-max);
+    margin-inline: auto;
+    padding-inline: var(--section-px);
+  }
+
+  .containerWide {
+    width: 100%;
+    max-width: var(--container-max-wide);
+    margin-inline: auto;
+    padding-inline: var(--section-px);
+  }
+
+  .section {
+    padding-block: var(--section-py);
+  }
+
+  /* Cards */
+  .card {
+    background: var(--color-surface);
+    border: var(--bw-1) solid var(--color-border-soft);
+    border-radius: var(--r-4);
+    box-shadow: var(--sh-1);
+  }
+
+  .cardSoft {
+    background: var(--color-surface-2);
+    border: var(--bw-1) solid var(--color-border-soft);
+    border-radius: var(--r-4);
+  }
+
+  /* “Pills” / chips */
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--sp-2);
+    padding: 0.5rem 0.85rem;
+    border-radius: var(--r-pill);
+    background: var(--color-surface-3);
+    border: var(--bw-1) solid var(--color-border-soft);
+    color: var(--color-text-2);
+    box-shadow: var(--sh-inset);
+    font-size: var(--fs-300);
+  }
+
+  /* Buttons */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--sp-2);
+    padding: 0.75rem 1.05rem;
+    border-radius: 14px;
+    border: var(--bw-1) solid transparent;
+    cursor: pointer;
+    user-select: none;
+    transition:
+      transform var(--dur-1) var(--ease-out),
+      box-shadow var(--dur-2) var(--ease-out),
+      background-color var(--dur-2) var(--ease-out),
+      border-color var(--dur-2) var(--ease-out),
+      color var(--dur-2) var(--ease-out);
+    font-weight: 650;
+    line-height: 1;
+    box-shadow: 0 10px 22px rgba(15, 23, 42, 0.1);
+  }
+
+  .btn:active {
+    transform: translateY(1px);
+  }
+
+  .btnPrimary {
+    background: var(--color-primary);
+    color: var(--color-primary-contrast);
+  }
+  .btnPrimary:hover {
+    background: var(--color-primary-hover);
+  }
+
+  .btnAccent {
+    background: var(--color-accent);
+    color: var(--color-accent-contrast);
+  }
+  .btnAccent:hover {
+    background: var(--color-accent-hover);
+  }
+
+  .btnGhost {
+    background: transparent;
+    color: var(--color-text);
+    border-color: var(--color-border);
+    box-shadow: none;
+  }
+  .btnGhost:hover {
+    background: rgba(15, 23, 42, 0.04);
+  }
+
+  .btnSm {
+    padding: 0.6rem 0.85rem;
+    border-radius: 12px;
+    font-size: var(--fs-300);
+  }
+
+  .btnLg {
+    padding: 0.95rem 1.25rem;
+    border-radius: 16px;
+  }
+
+  /* Forms */
+  .field {
+    display: grid;
+    gap: 0.45rem;
+  }
+
+  .label {
+    font-size: var(--fs-300);
+    color: var(--color-text-2);
+    font-weight: 600;
+  }
+
+  .input,
+  .textarea,
+  .select {
+    width: 100%;
+    background: var(--color-surface);
+    border: var(--bw-1) solid var(--color-border-soft);
+    border-radius: var(--r-2);
+    padding: 0.85rem 0.95rem;
+    line-height: var(--lh-normal);
+    box-shadow: var(--sh-inset);
+    transition:
+      border-color var(--dur-2) var(--ease-out),
+      box-shadow var(--dur-2) var(--ease-out);
+  }
+
+  .textarea {
+    min-height: 132px;
+    resize: vertical;
+  }
+
+  .input::placeholder,
+  .textarea::placeholder {
+    color: rgba(71, 85, 105, 0.7);
+  }
+
+  .input:focus,
+  .textarea:focus,
+  .select:focus {
+    outline: none;
+    border-color: rgba(22, 180, 171, 0.55);
+    box-shadow: 0 0 0 4px rgba(22, 180, 171, 0.18);
+  }
+
+  /* Nice “hero” block default */
+  .hero {
+    padding-block: clamp(2.5rem, 5vw, 5.5rem);
+    background: var(--grad-hero);
+  }
+
+  .heroTitle {
+    font-size: var(--fs-900);
+    line-height: var(--lh-tight);
+    letter-spacing: -0.025em;
+    color: var(--color-primary);
+  }
+
+  .accent {
+    color: var(--color-accent);
+  }
+}
+
+/* -------------------------------- UTILITIES ----------------------------- */
+@layer utilities {
+  /* Layout helpers */
+  .stack {
+    display: grid;
+    gap: var(--sp-6);
+  }
+
+  .stackSm {
+    display: grid;
+    gap: var(--sp-4);
+  }
+
+  .row {
+    display: flex;
+    gap: var(--sp-4);
+    align-items: center;
+  }
+
+  .wrap {
+    flex-wrap: wrap;
+  }
+
+  .grid2 {
+    display: grid;
+    gap: var(--sp-6);
+    grid-template-columns: 1fr;
+  }
+
+  .grid3 {
+    display: grid;
+    gap: var(--sp-6);
+    grid-template-columns: 1fr;
+  }
+
+  @media (min-width: 768px) {
+    .grid2 {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .grid3 {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+
+  .center {
+    display: grid;
+    place-items: center;
+  }
+
+  .srOnly {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  /* Spacing shortcuts (global only a few, reszta w module.css) */
+  .mt0 {
+    margin-top: 0;
+  }
+  .mt4 {
+    margin-top: var(--sp-4);
+  }
+  .mt6 {
+    margin-top: var(--sp-6);
+  }
+  .mt8 {
+    margin-top: var(--sp-8);
+  }
+
+  .mb0 {
+    margin-bottom: 0;
+  }
+  .mb4 {
+    margin-bottom: var(--sp-4);
+  }
+  .mb6 {
+    margin-bottom: var(--sp-6);
+  }
+  .mb8 {
+    margin-bottom: var(--sp-8);
+  }
+
+  /* Visual helpers */
+  .divider {
+    height: 1px;
+    background: var(--color-border-soft);
+    width: 100%;
+  }
+
+  /* Breakpoint variant: style switch controlled by global tokens */
+  .breakpoint,
+  .breakpointReverse {
+    background: var(--breakpoint-bg);
+    color: var(--breakpoint-text);
+  }
+
+  .breakpoint :where(h1, h2, h3, h4, h5, h6, p, li, .lead, .muted, .textSm),
+  .breakpointReverse
+    :where(h1, h2, h3, h4, h5, h6, p, li, .lead, .muted, .textSm) {
+    color: var(--breakpoint-text);
+  }
+
+  .breakpoint .card,
+  .breakpointReverse .card {
+    background: var(--breakpoint-card-bg);
+    color: var(--breakpoint-card-text);
+    border-color: var(--breakpoint-card-border);
+    box-shadow: var(--breakpoint-card-shadow);
+  }
+
+  .breakpoint
+    .card
+    :where(h1, h2, h3, h4, h5, h6, p, li, .lead, .muted, .textSm),
+  .breakpointReverse
+    .card
+    :where(h1, h2, h3, h4, h5, h6, p, li, .lead, .muted, .textSm) {
+    color: inherit;
+  }
+
+  .breakpoint .btn,
+  .breakpointReverse .btn {
+    background: var(--breakpoint-btn-bg);
+    color: var(--breakpoint-btn-text);
+    border-color: var(--breakpoint-btn-border);
+    box-shadow: var(--breakpoint-btn-shadow);
+  }
+
+  .breakpoint
+    .btn
+    :where(h1, h2, h3, h4, h5, h6, p, li, .lead, .muted, .textSm),
+  .breakpointReverse
+    .btn
+    :where(h1, h2, h3, h4, h5, h6, p, li, .lead, .muted, .textSm) {
+    color: inherit;
+  }
+
+  .breakpoint .btn:hover,
+  .breakpointReverse .btn:hover {
+    background: var(--breakpoint-btn-hover-bg);
   }
 }

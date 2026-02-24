@@ -1,0 +1,39 @@
+.section {
+  background: var(--color-surface-2);
+}
+
+.container {
+  display: grid;
+  gap: var(--sp-6);
+}
+
+.header {
+  max-width: 62rem;
+}
+
+.list {
+  display: grid;
+  gap: var(--sp-3);
+}
+
+.item {
+  padding: var(--sp-5);
+  color: var(--color-text-2);
+}
+
+.note {
+  color: var(--color-text-2);
+  font-size: var(--fs-300);
+}
+
+.cta {
+  width: fit-content;
+  text-decoration: none;
+}
+
+@media (min-width: 768px) {
+  .list {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
