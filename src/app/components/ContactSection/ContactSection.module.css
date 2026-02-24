@@ -18,3 +18,26 @@
 .cta {
   text-decoration: none;
 }
+
+@media (max-width: 639px) {
+  .actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .cta {
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+  }
+}
+
+@media (max-width: 412px) {
+  .container {
+    gap: var(--sp-5);
+  }
+
+  .header {
+    gap: var(--sp-3);
+  }
+}

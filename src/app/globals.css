@@ -92,14 +92,14 @@
       "Courier New", monospace;
 
     /* Fluid type scale (clamp(min, vw, max)) */
-    --fs-900: clamp(2.1rem, 2.6vw + 1.2rem, 3.25rem); /* hero */
-    --fs-800: clamp(1.8rem, 1.9vw + 1.1rem, 2.4rem); /* h1 */
-    --fs-700: clamp(1.45rem, 1.2vw + 1rem, 1.9rem); /* h2 */
-    --fs-600: clamp(1.2rem, 0.6vw + 1rem, 1.45rem); /* h3 */
-    --fs-500: 1.0625rem; /* base+ */
-    --fs-400: 1rem; /* base */
-    --fs-300: 0.9375rem; /* small */
-    --fs-200: 0.875rem; /* xs */
+    --fs-900: clamp(2.35rem, 2.9vw + 1.25rem, 3.6rem); /* hero */
+    --fs-800: clamp(2rem, 2.1vw + 1.15rem, 2.75rem); /* h1 */
+    --fs-700: clamp(1.6rem, 1.35vw + 1.02rem, 2.15rem); /* h2 */
+    --fs-600: clamp(1.3rem, 0.75vw + 1rem, 1.65rem); /* h3 */
+    --fs-500: 1.125rem; /* base+ */
+    --fs-400: 1.0625rem; /* base */
+    --fs-300: 1rem; /* small */
+    --fs-200: 0.9375rem; /* xs */
 
     --lh-tight: 1.1;
     --lh-snug: 1.25;
@@ -126,8 +126,8 @@
     --sp-32: 8rem; /* 128 */
 
     /* Fluid section padding (nice on mobile and desktop) */
-    --section-py: clamp(2.5rem, 4vw, 5rem);
-    --section-px: clamp(1rem, 3vw, 2rem);
+    --section-py: clamp(1.2rem, 2vw, 2.6rem);
+    --section-px: clamp(0.625rem, 1.2vw, 1rem);
 
     /* ---- Radius (rounded, friendly, premium) */
     --r-1: 10px;
@@ -146,8 +146,8 @@
     --bw-2: 2px;
 
     /* ---- Layout */
-    --container-max: 1160px;
-    --container-max-wide: 1240px;
+    --container-max: 1480px;
+    --container-max-wide: 1640px;
 
     /* ---- Brand palette (granat + teal + lawenda, “cleaning-premium”) */
     --brand-navy-950: #0b1630;
@@ -264,6 +264,57 @@
     --bp-lg: 1024px;
     --bp-xl: 1280px;
   }
+
+  /* Ultra-edge responsive token bands */
+  @media (max-width: 360px) {
+    :root {
+      --section-px: 0.625rem;
+      --section-py: clamp(1rem, 1.8vw, 1.6rem);
+      --fs-400: 1rem;
+      --fs-300: 0.9375rem;
+      --fs-200: 0.875rem;
+    }
+  }
+
+  @media (min-width: 361px) and (max-width: 412px) {
+    :root {
+      --section-px: 0.75rem;
+      --section-py: clamp(1.1rem, 2vw, 1.9rem);
+    }
+  }
+
+  @media (min-width: 413px) and (max-width: 540px) {
+    :root {
+      --section-px: 0.85rem;
+      --section-py: clamp(1.2rem, 2.1vw, 2.1rem);
+    }
+  }
+
+  @media (min-width: 768px) and (max-width: 912px) {
+    :root {
+      --section-px: 0.95rem;
+      --section-py: clamp(1.6rem, 2.2vw, 2.4rem);
+    }
+  }
+
+  @media (min-width: 913px) and (max-width: 1024px) {
+    :root {
+      --section-px: 1rem;
+      --section-py: clamp(1.8rem, 2.4vw, 2.8rem);
+    }
+  }
+
+  @media (min-width: 1280px) and (max-width: 1439px) {
+    :root {
+      --section-px: clamp(1rem, 1vw, 1.25rem);
+    }
+  }
+
+  @media (min-width: 1440px) {
+    :root {
+      --section-px: clamp(1.2rem, 1.2vw, 1.5rem);
+    }
+  }
 }
 
 /* --------------------------------- BASE --------------------------------- */
@@ -277,11 +328,13 @@
   body {
     font-size: var(--fs-400);
     line-height: var(--lh-normal);
+    overflow-x: clip;
   }
 
   /* Page background pattern like the templates (but cleaner) */
   .pageBg {
     background: var(--grad-hero);
+    overflow-x: clip;
   }
 
   /* Headings */
@@ -378,18 +431,31 @@
     padding-block: var(--section-py);
   }
 
+  .pageBg > .section:not(:first-of-type) {
+    padding-block: clamp(2.4rem, 4.4vw, 5.4rem);
+  }
+
   /* Cards */
   .card {
-    background: var(--color-surface);
-    border: var(--bw-1) solid var(--color-border-soft);
+    background: rgba(255, 255, 255, 0.72);
+    border: var(--bw-1) solid rgba(255, 255, 255, 0.35);
     border-radius: 0;
-    box-shadow: var(--sh-1);
+    box-shadow:
+      0 12px 30px rgba(16, 24, 40, 0.08),
+      inset 0 1px 0 rgba(255, 255, 255, 0.55);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
   }
 
   .cardSoft {
-    background: var(--color-surface-2);
-    border: var(--bw-1) solid var(--color-border-soft);
+    background: rgba(255, 255, 255, 0.66);
+    border: var(--bw-1) solid rgba(255, 255, 255, 0.32);
     border-radius: 0;
+    box-shadow:
+      0 10px 26px rgba(16, 24, 40, 0.07),
+      inset 0 1px 0 rgba(255, 255, 255, 0.52);
+    backdrop-filter: blur(9px);
+    -webkit-backdrop-filter: blur(9px);
   }
 
   /* “Pills” / chips */
@@ -426,6 +492,9 @@
     font-weight: 650;
     line-height: 1;
     box-shadow: 0 10px 22px rgba(15, 23, 42, 0.1);
+    --btn-hover-bg: transparent;
+    --btn-hover-border: transparent;
+    --btn-hover-color: currentColor;
   }
 
   .btn:active {
@@ -435,17 +504,17 @@
   .btnPrimary {
     background: var(--color-primary);
     color: var(--color-primary-contrast);
-  }
-  .btnPrimary:hover {
-    background: var(--color-primary-hover);
+    --btn-hover-bg: var(--color-primary-hover);
+    --btn-hover-border: var(--color-primary-hover);
+    --btn-hover-color: var(--color-primary-contrast);
   }
 
   .btnAccent {
     background: var(--color-accent);
     color: var(--color-accent-contrast);
-  }
-  .btnAccent:hover {
-    background: var(--color-accent-hover);
+    --btn-hover-bg: var(--color-accent-hover);
+    --btn-hover-border: var(--color-accent-hover);
+    --btn-hover-color: var(--color-accent-contrast);
   }
 
   .btnGhost {
@@ -453,9 +522,17 @@
     color: var(--color-text);
     border-color: var(--color-border);
     box-shadow: none;
+    --btn-hover-bg: rgba(15, 23, 42, 0.06);
+    --btn-hover-border: color-mix(in oklab, var(--color-border) 86%, var(--color-text) 14%);
+    --btn-hover-color: var(--color-text);
   }
-  .btnGhost:hover {
-    background: rgba(15, 23, 42, 0.04);
+
+  .btn:is(:hover, :focus-visible):not(:disabled) {
+    background: var(--btn-hover-bg);
+    border-color: var(--btn-hover-border);
+    color: var(--btn-hover-color);
+    box-shadow: 0 12px 26px rgba(15, 23, 42, 0.14);
+    transform: translateY(-1px);
   }
 
   .btnSm {
@@ -677,5 +754,63 @@
   .breakpoint .btn:hover,
   .breakpointReverse .btn:hover {
     background: var(--breakpoint-btn-hover-bg);
+  }
+
+  .breakpoint .btnPrimary:is(:hover, :focus-visible):not(:disabled),
+  .breakpointReverse .btnPrimary:is(:hover, :focus-visible):not(:disabled) {
+    background: color-mix(in oklab, var(--breakpoint-btn-bg) 86%, var(--color-text) 14%);
+    border-color: color-mix(in oklab, var(--breakpoint-btn-border) 72%, var(--color-text) 28%);
+  }
+
+  .breakpoint .btnAccent:is(:hover, :focus-visible):not(:disabled),
+  .breakpointReverse .btnAccent:is(:hover, :focus-visible):not(:disabled) {
+    background: color-mix(in oklab, var(--breakpoint-btn-bg) 86%, var(--color-accent) 14%);
+    border-color: color-mix(in oklab, var(--breakpoint-btn-border) 68%, var(--color-accent) 32%);
+  }
+
+  .breakpoint .btnGhost:is(:hover, :focus-visible):not(:disabled),
+  .breakpointReverse .btnGhost:is(:hover, :focus-visible):not(:disabled) {
+    background: color-mix(in oklab, var(--breakpoint-btn-bg) 90%, var(--color-text) 10%);
+    border-color: color-mix(in oklab, var(--breakpoint-btn-border) 74%, var(--color-text) 26%);
+  }
+
+  /* Home page scalable skin */
+  .homeDesignV2 > .section:not(:first-of-type) {
+    padding-block: clamp(2.3rem, 4.2vw, 5rem);
+    background: #f6f3ff;
+  }
+
+  .homeDesignV2 > .section:not(:first-of-type):nth-of-type(odd) {
+    background: color-mix(in oklab, #f6f3ff 72%, var(--white) 28%);
+  }
+
+  .homeDesignV2 > .section:not(:first-of-type) .container {
+    display: grid;
+    gap: var(--sp-6);
+  }
+
+  .homeDesignV2 > .section:not(:first-of-type) .container > header {
+    max-width: 62rem;
+    display: grid;
+    gap: var(--sp-3);
+  }
+
+  .homeDesignV2 > .section:not(:first-of-type) h2 {
+    line-height: 1.16;
+    text-wrap: balance;
+  }
+
+  .homeDesignV2 > .section:not(:first-of-type) .card {
+    border-color: rgba(255, 255, 255, 0.35);
+    box-shadow:
+      0 12px 30px rgba(16, 24, 40, 0.08),
+      inset 0 1px 0 rgba(255, 255, 255, 0.55);
+    background: rgba(255, 255, 255, 0.72);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+
+  .homeDesignV2 > .section:not(:first-of-type) .btn {
+    border-radius: 0.85rem;
   }
 }

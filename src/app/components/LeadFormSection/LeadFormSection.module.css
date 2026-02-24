@@ -13,17 +13,231 @@
   max-width: 62rem;
 }
 
+.content {
+  display: grid;
+  gap: var(--sp-4);
+}
+
 .form {
   display: grid;
   gap: var(--sp-5);
   padding: var(--sp-6);
 }
 
+.form,
+.proof,
+.successCard {
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-color: rgba(255, 255, 255, 0.35);
+  box-shadow:
+    0 12px 30px rgba(16, 24, 40, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.55);
+}
+
+.form :global(.input:focus),
+.form :global(.textarea:focus) {
+  border-color: color-mix(in oklab, var(--ui-primary) 56%, transparent);
+  box-shadow: 0 0 0 4px color-mix(in oklab, var(--ui-primary) 26%, transparent);
+}
+
 .submit {
   width: fit-content;
+}
+
+.submit:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.trustRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.trustBadge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.2rem 0.52rem;
+  border-radius: var(--r-pill);
+  font-size: 0.78rem;
+  color: color-mix(in oklab, var(--color-muted) 84%, var(--ui-primary) 16%);
+  background: color-mix(in oklab, var(--ui-primary) 6%, var(--white));
+  border: 1px solid color-mix(in oklab, var(--ui-primary) 14%, transparent);
+}
+
+.fieldHint {
+  margin: -0.15rem 0 0.1rem;
+  color: var(--color-muted);
+  font-size: var(--fs-200);
+  line-height: 1.45;
+}
+
+.inputError {
+  border-color: color-mix(in oklab, var(--color-danger) 72%, transparent) !important;
+}
+
+.fieldError {
+  margin: 0.1rem 0 0;
+  color: color-mix(in oklab, var(--color-danger) 84%, var(--color-text) 16%);
+  font-size: var(--fs-200);
+  line-height: 1.45;
+}
+
+.guidance {
+  display: grid;
+  gap: var(--sp-2);
+}
+
+.guidanceLabel {
+  margin: 0;
+  color: var(--color-muted);
+  font-size: var(--fs-200);
+  font-weight: 700;
+}
+
+.guidanceChips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.guidanceChip {
+  border: 1px solid color-mix(in oklab, var(--ui-primary) 24%, transparent);
+  background: color-mix(in oklab, var(--ui-primary) 9%, var(--white));
+  color: var(--ui-primary);
+  border-radius: var(--r-pill);
+  padding: 0.28rem 0.62rem;
+  font-size: var(--fs-200);
+  font-weight: 600;
+  line-height: 1.2;
+  cursor: pointer;
+  transition:
+    background-color var(--dur-2) var(--ease-out),
+    border-color var(--dur-2) var(--ease-out),
+    color var(--dur-2) var(--ease-out);
+}
+
+.guidanceChip:hover {
+  background: color-mix(in oklab, var(--ui-primary) 14%, var(--white));
+  border-color: color-mix(in oklab, var(--ui-primary) 34%, transparent);
+}
+
+.proof {
+  display: grid;
+  align-content: start;
+  gap: var(--sp-4);
+  padding: var(--sp-6);
+}
+
+.successCard {
+  display: grid;
+  align-content: start;
+  gap: var(--sp-3);
+  padding: var(--sp-6);
+}
+
+.successCard h3 {
+  margin: 0;
+}
+
+.successCard p {
+  margin: 0;
+  color: var(--color-text-2);
+}
+
+.successSteps {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 0.55rem;
+}
+
+.successSteps li {
+  position: relative;
+  padding-left: 1.25rem;
+  color: var(--color-text-2);
+  line-height: 1.5;
+}
+
+.successSteps li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.3em;
+  width: 0.82rem;
+  height: 0.82rem;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none'%3E%3Ccircle cx='8' cy='8' r='6.5' stroke='%2300928B' stroke-opacity='0.65'/%3E%3Cpath d='M4.8 8.2 7 10.3 11.2 6.1' stroke='%2300928B' stroke-opacity='0.65' stroke-width='1.35' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.proof h3 {
+  margin: 0;
+}
+
+.proofList {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 0.55rem;
+}
+
+.proofList li {
+  position: relative;
+  padding-left: 1.2rem;
+  color: var(--color-text-2);
+  line-height: 1.5;
+}
+
+.proofList li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.3em;
+  width: 0.82rem;
+  height: 0.82rem;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none'%3E%3Ccircle cx='8' cy='8' r='6.5' stroke='%2300928B' stroke-opacity='0.65'/%3E%3Cpath d='M4.8 8.2 7 10.3 11.2 6.1' stroke='%2300928B' stroke-opacity='0.65' stroke-width='1.35' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-size: contain;
 }
 
 .note {
   color: var(--color-muted);
   font-size: var(--fs-300);
+}
+
+@media (min-width: 1120px) {
+  .content {
+    grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
+    align-items: start;
+    gap: var(--sp-6);
+  }
+
+  .proof {
+    position: sticky;
+    top: 6.25rem;
+  }
+}
+
+@media (max-width: 412px) {
+  .form,
+  .proof,
+  .successCard {
+    padding: var(--sp-5);
+  }
+
+  .guidanceChip {
+    font-size: 0.82rem;
+  }
+
+  .submit {
+    width: 100%;
+    justify-content: center;
+  }
 }

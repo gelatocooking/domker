@@ -14,7 +14,7 @@ import WhyDomkerSection from "./components/WhyDomkerSection/WhyDomkerSection";
 
 export default function HomePage() {
   return (
-    <main className="pageBg">
+    <main className="pageBg homeDesignV2">
       <Header />
       <HeroSection />
       <PainPointsSection />
@@ -24,7 +24,7 @@ export default function HomePage() {
       <WhyDomkerSection />
       <SlaSection />
       <RisksSection />
-      <ProofSection />
+      {/* <ProofSection /> */}
       <FaqSection />
       <ContactSection />
       <LeadFormSection />
