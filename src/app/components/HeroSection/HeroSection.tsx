@@ -78,13 +78,13 @@ export default function HeroSection() {
 
               <div className={styles.actions}>
                 <Link href="/kontakt" className={`btn btnPrimary ${styles.actionMain}`}>
-                  Odbierz ofertę do wysłania
+                Wypełnij formularz kontaktowy
                 </Link>
                 <a
                   href="tel:+48502992002"
                   className={`btn btnGhost ${styles.actionSecondary}`}
                 >
-                  Kontakt operacyjny
+                  Zadzwoń pilnie
                 </a>
               </div>
 

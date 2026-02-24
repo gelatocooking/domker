@@ -143,6 +143,14 @@
   line-height: 1.45;
 }
 
+.processIntro {
+  margin: 0;
+  color: var(--color-text);
+  font-size: clamp(1rem, 0.95rem + 0.26vw, 1.14rem);
+  line-height: 1.45;
+  font-weight: 650;
+}
+
 .processStrip {
   margin: 0;
   padding: 0.65rem 0.85rem;
@@ -166,6 +174,7 @@
   color: var(--color-text-2);
   font-size: var(--fs-300);
   font-weight: 600;
+  transition: color var(--dur-2) var(--ease-out);
 }
 
 .processIcon {
@@ -178,6 +187,11 @@
   color: var(--ui-primary);
   background: color-mix(in oklab, var(--ui-primary) 12%, var(--white));
   flex-shrink: 0;
+  transition:
+    background-color var(--dur-2) var(--ease-out),
+    color var(--dur-2) var(--ease-out),
+    transform var(--dur-2) var(--ease-out),
+    box-shadow var(--dur-2) var(--ease-out);
 }
 
 .processIcon svg {
@@ -186,6 +200,22 @@
 }
 
 .processLabel {
+  color: var(--color-muted);
+  transition: color var(--dur-2) var(--ease-out);
+}
+
+.processStepActive {
+  color: var(--color-text);
+}
+
+.processStepActive .processIcon {
+  color: var(--white);
+  background: color-mix(in oklab, var(--ui-primary) 82%, var(--white) 18%);
+  box-shadow: 0 8px 18px rgba(16, 24, 40, 0.16);
+  transform: translateY(-1px);
+}
+
+.processStepActive .processLabel {
   color: var(--color-text);
 }
 

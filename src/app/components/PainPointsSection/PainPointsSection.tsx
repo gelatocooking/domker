@@ -1,7 +1,7 @@
 ﻿"use client";
 
 import { useEffect, useRef } from "react";
-import Image from "next/image";
+import { useState } from "react";
 import styles from "./PainPointsSection.module.css";
 
 const riskCards = [
@@ -113,6 +113,8 @@ function renderProcessIcon(step: (typeof processSteps)[number]) {
 
 export default function PainPointsSection() {
   const sectionRef = useRef<HTMLElement | null>(null);
+  const processStripRef = useRef<HTMLOListElement | null>(null);
+  const [activeStep, setActiveStep] = useState(0);
 
   useEffect(() => {
     const section = sectionRef.current;
@@ -126,7 +128,23 @@ export default function PainPointsSection() {
       const progress = (viewportHeight - rect.top) / (viewportHeight + rect.height);
       const clamped = Math.max(0, Math.min(1, progress));
       const offset = (clamped - 0.5) * 40;
+      const stripRect = processStripRef.current?.getBoundingClientRect();
+      let activationProgress = 0;
+
+      if (stripRect) {
+        const startY = viewportHeight * 0.78;
+        const endY = viewportHeight * 0.28;
+        const travel = Math.max(1, startY - endY);
+        const raw = (startY - stripRect.top) / travel;
+        activationProgress = Math.max(0, Math.min(1, raw));
+      }
+
+      const nextActiveStep = Math.min(
+        processSteps.length - 1,
+        Math.max(0, Math.floor(activationProgress * processSteps.length)),
+      );
       section.style.setProperty("--parallax-offset", `${offset.toFixed(2)}px`);
+      setActiveStep((current) => (current === nextActiveStep ? current : nextActiveStep));
       ticking = false;
     };
 
@@ -188,9 +206,16 @@ export default function PainPointsSection() {
           ))}
         </ul>
 
-        <ol className={styles.processStrip} aria-label="Proces Domker">
-          {processSteps.map((step) => (
-            <li key={step} className={styles.processStep}>
+        <p className={styles.processIntro}>
+          Domker odpowiada na te wyzwania przez skuteczny proces:
+        </p>
+
+        <ol ref={processStripRef} className={styles.processStrip} aria-label="Proces Domker">
+          {processSteps.map((step, index) => (
+            <li
+              key={step}
+              className={`${styles.processStep} ${index <= activeStep ? styles.processStepActive : ""}`}
+            >
               <span className={styles.processIcon} aria-hidden="true">
                 {renderProcessIcon(step)}
               </span>
@@ -202,7 +227,5 @@ export default function PainPointsSection() {
     </section>
   );
 }
-
-
 
 
